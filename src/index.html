@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
   <title>GHAMBOLA</title>
@@ -27,38 +27,33 @@
   
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
   <style>
     .app-loading {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: #ffffff;
-      z-index: 9999;
+      z-index: 99999;
       flex-direction: column;
     }
+    .app-loading img {
+      height: 90px;
+      margin-bottom: 35px;
+      animation: pulse 1.5s ease-in-out infinite;
+      transform: scale(1.4);
+    }
     .app-loading .spinner {
-      width: 60px;
-      height: 60px;
-      border: 4px solid rgba(88, 61, 42, 0.1);
-      border-top: 4px solid #583d2a;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(88, 61, 42, 0.1);
+      border-top: 3px solid #583d2a;
       border-radius: 50%;
       animation: spin 1s linear infinite;
-    }
-    .app-loading .loading-text {
-      margin-top: 24px;
-      font-family: 'Inter', sans-serif;
-      color: #583d2a;
-      font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      animation: pulse 1.5s ease-in-out infinite;
     }
     @keyframes spin {
       0% { transform: rotate(0deg); }
@@ -73,8 +68,8 @@
 <body>
   <app-root>
     <div class="app-loading">
+      <img src="/logo.png" alt="Ghambola Logo">
       <div class="spinner"></div>
-      <div class="loading-text">Ghambola</div>
     </div>
   </app-root>
 </body>

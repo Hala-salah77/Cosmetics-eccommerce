@@ -18,6 +18,32 @@ html,
 body {
   height: 100%;
   margin: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* ================ Custom Premium Scrollbar ================ */
+::-webkit-scrollbar {
+  width: 14px; /* Wider to allow for transparent borders */
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Clean transparent track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(88, 61, 42, 0.3); /* Subtle primary color */
+  border: 4px solid rgba(0, 0, 0, 0); /* Transparent border acts as margin */
+  background-clip: padding-box; /* Makes the background stay inside the border */
+  border-radius: 9999px; /* Perfect pill shape */
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(88, 61, 42, 0.7); /* Darkens when interacted with */
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
 }
 
 // Custom Utility Enhancements

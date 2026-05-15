@@ -329,7 +329,7 @@ export class TranslationService {
 
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
-    const saved = (this.isBrowser && localStorage.getItem('ghambola_lang') as Lang) || 'en';
+    const saved = (this.isBrowser && localStorage.getItem('ghambola_lang') as Lang) || 'ar';
     this.langSubject = new BehaviorSubject<Lang>(saved);
     this.lang$ = this.langSubject.asObservable();
     this.applyDir(saved);
