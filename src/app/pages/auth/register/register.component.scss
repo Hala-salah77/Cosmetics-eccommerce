@@ -1,0 +1,21 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.register-image {
+    background-color: rgb(55, 37, 37);
+}
+
+.custom-checkbox:checked {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+.hover-primary:hover {
+    color: var(--bs-primary) !important;
+}
+
+.form-control:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(44, 94, 59, 0.25);
+}

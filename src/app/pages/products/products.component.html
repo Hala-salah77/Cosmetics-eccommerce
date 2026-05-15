@@ -1,0 +1,171 @@
+<div [attr.dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+    <div class="bg-light py-4 border-bottom border-secondary border-opacity-10">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a routerLink="/" class="text-decoration-none text-muted hover-primary">{{ tr.t('nav.home') }}</a></li>
+                    <li class="breadcrumb-item active fw-medium" aria-current="page">{{ tr.t('products.title') }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row mb-5 align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-5 fw-bold text-dark mb-0">{{ tr.t('products.title') }}</h1>
+                <p class="text-muted mt-2 mb-0" style="letter-spacing: 0.5px;">
+                    {{ (tr.lang$ | async) === 'ar' ? 'إظهار' : 'Showing' }} 
+                    {{ ((currentPage - 1) * itemsPerPage) + 1 }} - 
+                    {{ Math.min(currentPage * itemsPerPage, items.length) }} 
+                    {{ (tr.lang$ | async) === 'ar' ? 'من' : 'of' }} {{ items.length }} 
+                    {{ (tr.lang$ | async) === 'ar' ? 'نتائج' : 'results' }}
+                </p>
+            </div>
+            <div class="col-md-6 mt-4 mt-md-0 d-flex justify-content-md-end gap-3 align-items-center">
+                <label for="sort" class="text-muted text-nowrap fw-medium" style="letter-spacing: 0.5px;">{{ tr.t('products.sort') }}</label>
+                <select id="sort"
+                    class="form-select w-auto rounded-pill cursor-pointer shadow-sm border-0 py-2 px-4 text-dark fw-bold bg-light">
+                    <option value="newest">{{ tr.t('products.newest') }}</option>
+                    <option value="price-asc">{{ tr.t('products.priceLow') }}</option>
+                    <option value="price-desc">{{ tr.t('products.priceHigh') }}</option>
+                    <option value="best">{{ tr.t('products.best') }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Sidebar Filters -->
+            <aside class="col-lg-3 mb-5 mb-lg-0">
+                <div class="card border-0 shadow-sm rounded-5 p-4 sticky-lg-top bg-white" style="top: 100px; z-index: 10;">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0 text-dark">{{ tr.t('products.filters') }}</h5>
+                        <button class="btn btn-link text-muted p-0 text-decoration-none small hover-primary">{{ tr.t('products.clearAll') }}</button>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="fw-bold fs-6 mb-3 text-secondary">{{ tr.t('products.category') }}</h6>
+                        <div class="form-check mb-3 custom-checkbox">
+                            <input class="form-check-input cursor-pointer shadow-none" type="checkbox" id="catAll" checked>
+                            <label class="form-check-label cursor-pointer text-dark fw-medium pt-1" for="catAll">{{ tr.t('products.all') }}</label>
+                        </div>
+                        <div class="form-check mb-3 custom-checkbox">
+                            <input class="form-check-input cursor-pointer shadow-none" type="checkbox" id="catSkin">
+                            <label class="form-check-label cursor-pointer text-muted pt-1 d-flex justify-content-between w-100" for="catSkin">
+                                <span>{{ tr.t('products.skin') }}</span>
+                            </label>
+                        </div>
+                        <div class="form-check custom-checkbox">
+                            <input class="form-check-input cursor-pointer shadow-none" type="checkbox" id="catHair">
+                            <label class="form-check-label cursor-pointer text-muted pt-1 d-flex justify-content-between w-100" for="catHair">
+                                <span>{{ tr.t('products.hair') }}</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <hr class="text-secondary opacity-10 my-4">
+
+                    <div class="mb-4">
+                        <h6 class="fw-bold fs-6 mb-3 text-secondary">{{ tr.t('products.price') }}</h6>
+                        <div class="d-flex align-items-center gap-2 mb-4">
+                            <div class="input-group input-group-sm rounded-pill overflow-hidden border border-secondary border-opacity-10">
+                                <span class="input-group-text bg-light border-0 text-muted ps-3">$</span>
+                                <input type="number" class="form-control border-0 bg-light text-center shadow-none" placeholder="Min" value="10">
+                            </div>
+                            <span class="text-muted">-</span>
+                            <div class="input-group input-group-sm rounded-pill overflow-hidden border border-secondary border-opacity-10">
+                                <span class="input-group-text bg-light border-0 text-muted ps-3">$</span>
+                                <input type="number" class="form-control border-0 bg-light text-center shadow-none" placeholder="Max" value="100">
+                            </div>
+                        </div>
+                        <input type="range" class="form-range" min="0" max="150" id="customRange">
+                    </div>
+
+                    <button class="btn btn-dark w-100 rounded-pill mt-3 py-3 fw-bold btn-hover-lift">{{ tr.t('products.apply') }}</button>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <div class="col-lg-9">
+                <div class="row g-4">
+                    <!-- Premium Minimalist Cards from Home Page -->
+                    <div class="col-sm-6 col-lg-4" *ngFor="let item of paginatedItems; trackBy: trackByFn">
+                        <div class="card h-100 border-0 bg-transparent card-product cursor-pointer" [routerLink]="['/product', item.id]">
+
+                            <div class="position-relative overflow-hidden product-img-wrapper" style="border-radius: 16px;">
+                                <!-- Images -->
+                                <div class="d-flex justify-content-center align-items-center position-relative image-switch-container bg-light"
+                                    style="padding-top: 130%; /* elegant portrait aspect ratio */">
+                                    <img [src]="item.image" alt="{{ item.name }}"
+                                        class="w-100 h-100 position-absolute top-0 start-0 object-fit-cover primary-img"
+                                        [class.has-hover]="item.descImg">
+                                    <img *ngIf="item.descImg" [src]="item.descImg" alt="{{ item.name }}"
+                                        class="w-100 h-100 position-absolute top-0 start-0 object-fit-cover hover-img">
+                                </div>
+
+                                <!-- Elegant Badge -->
+                                <div class="position-absolute top-0 start-0 mt-3 ms-3 z-2" *ngIf="item.bestSeller">
+                                    <span class="badge bg-dark text-white fw-medium px-3 py-2 shadow-sm"
+                                        style="border-radius: 6px; letter-spacing: 1px; font-size: 0.65rem; text-transform: uppercase;">
+                                        Best Seller
+                                    </span>
+                                </div>
+
+                                <!-- Quick Add to Cart Button (Floating) -->
+                                <button class="btn btn-white rounded-circle shadow-lg quick-add-btn position-absolute z-3 d-flex align-items-center justify-content-center bg-white border-0 text-dark hover-primary"
+                                    (click)="addToCart($event, item)" aria-label="Add to cart"
+                                    style="width: 45px; height: 45px; bottom: 15px; right: 15px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
+                                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="card-body px-2 py-3 text-start d-flex flex-column" [attr.dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <p class="text-muted small text-uppercase mb-0 tracking-wider" style="font-size: 0.7rem; letter-spacing: 1px;">{{ item.category || 'Natural Care' }}</p>
+                                </div>
+
+                                <h5 class="card-title fw-bold text-dark mb-2 fs-6" style="line-height: 1.4;">{{ item.name }}</h5>
+
+                                <div class="mt-auto d-flex align-items-center gap-2">
+                                    <span class="fs-6 fw-bolder text-primary">${{ item.price.toFixed(2) }}</span>
+                                    <span *ngIf="item.oldPrice" class="text-muted text-decoration-line-through small" style="font-size: 0.85rem;">${{ item.oldPrice.toFixed(2) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Pagination -->
+                <nav *ngIf="totalPages > 1" class="mt-5 pt-4 border-top border-secondary border-opacity-10 d-flex justify-content-center" aria-label="Product pagination">
+                    <ul class="pagination pagination-md gap-2">
+                        <li class="page-item" [class.disabled]="currentPage === 1">
+                            <a class="page-link rounded-circle d-flex justify-content-center align-items-center border-0 bg-light text-dark hover-primary fw-bold"
+                                style="width: 44px; height: 44px;" href="#" (click)="prevPage($event)" [attr.aria-disabled]="currentPage === 1">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        
+                        <li class="page-item" *ngFor="let page of pagesArray" [class.active]="page === currentPage">
+                            <a class="page-link rounded-circle d-flex justify-content-center align-items-center border-0 fw-bold transition-all"
+                                [ngClass]="page === currentPage ? 'bg-dark text-white shadow-sm' : 'bg-light text-dark hover-primary'"
+                                style="width: 44px; height: 44px;" href="#" (click)="goToPage($event, page)">
+                                {{ page }}
+                            </a>
+                        </li>
+
+                        <li class="page-item" [class.disabled]="currentPage === totalPages">
+                            <a class="page-link rounded-circle d-flex justify-content-center align-items-center border-0 bg-light text-dark hover-primary fw-bold"
+                                style="width: 44px; height: 44px;" href="#" (click)="nextPage($event)" [attr.aria-disabled]="currentPage === totalPages">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>

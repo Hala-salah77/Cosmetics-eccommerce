@@ -1,0 +1,100 @@
+<!-- <div class="bg-light py-4 border-bottom border-secondary border-opacity-10">
+    <div class="container">
+        <h1 class="display-6 fw-bold text-secondary mb-0">{{ tr.t('cart.title') }}</h1>
+    </div>
+</div> -->
+
+<div class="container py-3 my-md-4">
+    <ng-container *ngIf="(cartItems$ | async) as items">
+
+        <!-- Empty Cart -->
+        <div *ngIf="items.length === 0" class="text-center py-5 my-5">
+            <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                style="width:120px;height:120px;">
+                <span style="font-size:4rem">🛒</span>
+            </div>
+            <h2 class="fw-bold text-secondary mb-3">{{ tr.t('cart.empty') }}</h2>
+            <p class="text-muted mb-4 pb-2">{{ tr.t('cart.emptyDesc') }}</p>
+            <a routerLink="/products" class="btn btn-primary rounded-pill px-5 py-3 fw-bold shadow-sm">{{
+                tr.t('cart.returnShop') }}</a>
+        </div>
+
+        <!-- Filled Cart -->
+        <div *ngIf="items.length > 0" class="row g-5">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+                    <div
+                        class="card-header bg-white border-bottom border-secondary border-opacity-10 py-3 px-4 d-none d-md-block">
+                        <div class="row text-muted fw-medium small text-uppercase">
+                            <div class="col-6">{{ tr.t('cart.product') }}</div>
+                            <div class="col-2 text-center">{{ tr.t('cart.price') }}</div>
+                            <div class="col-2 text-center">{{ tr.t('cart.qty') }}</div>
+                            <div class="col-2 text-end">{{ tr.t('cart.total') }}</div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="row align-items-center border-bottom border-light p-4 position-relative"
+                            *ngFor="let item of items">
+                            <button
+                                class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 mt-2 me-2 px-3 fw-bold text-decoration-none"
+                                (click)="removeItem(item.id)">✕</button>
+                            <div class="col-12 col-md-6 mb-3 mb-md-0 d-flex align-items-center gap-3">
+                                <div class="bg-light rounded-3 d-flex justify-content-center align-items-center border border-secondary border-opacity-10"
+                                    style="width:80px;height:80px;flex-shrink:0;">
+                                    <span class="fs-2">🌿</span>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold text-secondary mb-1">{{ item.name }}</h6>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-2 text-md-center">
+                                <span class="fw-medium text-secondary">$ {{ item.price.toFixed(2) }}</span>
+                            </div>
+                            <div class="col-4 col-md-2 d-flex justify-content-center">
+                                <span class="bg-light px-3 py-1 rounded-pill fw-medium text-secondary">{{ item.quantity
+                                    }}</span>
+                            </div>
+                            <div class="col-4 col-md-2 text-end">
+                                <span class="fw-bold text-primary">$ {{ (item.price * item.quantity).toFixed(2)
+                                    }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <a routerLink="/products" class="btn btn-outline-secondary rounded-pill px-4 fw-medium">{{
+                        tr.t('cart.continue') }}</a>
+                    <button class="btn btn-outline-danger rounded-pill px-4 fw-medium" (click)="clearCart()">{{
+                        tr.t('cart.clear') }}</button>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 p-4 sticky-lg-top" style="top:100px;">
+                    <h5 class="fw-bold text-secondary mb-4">{{ tr.t('cart.summary') }}</h5>
+                    <div class="d-flex justify-content-between mb-3 text-muted">
+                        <span>{{ tr.t('cart.subtotal') }}</span>
+                        <span class="fw-medium text-secondary">$ {{ getSubtotal(items).toFixed(2) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3 text-muted">
+                        <span>{{ tr.t('cart.shipping') }}</span>
+                        <span class="fw-medium text-secondary">$ {{ getShipping(items).toFixed(2) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-4 text-muted">
+                        <span>{{ tr.t('cart.tax') }}</span>
+                        <span class="fw-medium text-secondary">$ {{ getTax(items).toFixed(2) }}</span>
+                    </div>
+                    <hr class="text-muted opacity-25 mb-4">
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="fw-bold text-secondary fs-5">{{ tr.t('cart.orderTotal') }}</span>
+                        <span class="fw-bold text-primary fs-4">$ {{ getTotal(items).toFixed(2) }}</span>
+                    </div>
+                    <button class="btn btn-primary w-100 py-3 rounded-pill fw-bold fs-5 shadow-sm">
+                        {{ tr.t('cart.checkout') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

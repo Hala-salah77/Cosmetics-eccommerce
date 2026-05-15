@@ -1,0 +1,93 @@
+<div class="container-fluid bg-light min-vh-100 d-flex align-items-center justify-content-center "
+    [attr.dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+    <div class="card border-0 shadow-lg rounded-4 overflow-hidden" style="max-width: 900px; width: 100%;">
+        <div class="row g-0 flex-row-reverse">
+            <!-- Image Section -->
+            <div class="register-image col-md-6 d-none d-md-block position-relative overflow-hidden">
+                <div class="position-absolute top-0 start-0 w-100 h-100 opacity-25">
+                    <div class="d-flex justify-content-center align-items-center h-100 text-white">
+                        <img src="https://res.cloudinary.com/dkbjna5nf/image/upload/v1778733540/Gemini_Generated_Image_i50hezi50hezi50h_vrtpak.png"
+                            alt="GHAMBOLA Logo" style="opacity: 0.9;">
+                    </div>
+                </div>
+                <div class="position-relative z-1 h-100 d-flex flex-column justify-content-center p-5 text-white mt-5">
+                    <h4 class=" fw-bold mb-4 text-center">{{ tr.t('auth.register.heroTitle') }}</h4>
+
+                    <p class="lead text-white-50">{{ tr.t('auth.register.heroDesc') }}</p>
+
+                </div>
+            </div>
+            <!-- Form Section -->
+            <div class="col-md-6 p-4 p-sm-5 bg-white">
+                <div class="text-center mb-4">
+                    <a routerLink="/" class="text-decoration-none d-inline-block d-md-none mb-4">
+                        <img src="/logo.png" alt="Logo" height="40" class="me-1 mb-1">
+                        <span class="fw-bold text-secondary fs-3">GHAMBOLA</span>
+                    </a>
+                    <h3 class="fw-bold text-secondary">{{ tr.t('auth.register.title') }}</h3>
+                    <p class="text-muted">{{ tr.t('auth.login.tagline') }}</p>
+                </div>
+
+                <form (ngSubmit)="onSubmit()">
+                    <div *ngIf="errorMessage"
+                        class="alert alert-danger bg-danger bg-opacity-10 border-0 text-danger fw-medium py-2 rounded-3 small mb-4">
+                        {{errorMessage}}
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingName" placeholder="Full Name"
+                            [(ngModel)]="fullName" name="fullName" required>
+                        <label for="floatingName" class="text-muted">{{ tr.t('auth.register.name') }}</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingEmail" placeholder="name&#64;example.com"
+                            [(ngModel)]="email" name="email" required>
+                        <label for="floatingEmail" class="text-muted">{{ tr.t('auth.register.email') }}</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                            [(ngModel)]="password" name="password" required>
+                        <label for="floatingPassword" class="text-muted">{{ tr.t('auth.register.pass') }}</label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control" id="floatingPasswordConfirm"
+                            placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPassword"
+                            required>
+                        <label for="floatingPasswordConfirm" class="text-muted">{{ tr.t('auth.register.confirmPass')
+                            }}</label>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="form-check d-flex align-items-center gap-2">
+                            <input class="form-check-input custom-checkbox cursor-pointer m-0" type="checkbox"
+                                id="terms" required>
+                            <label class="form-check-label text-muted cursor-pointer small mt-1" for="terms">
+                                {{ tr.t('auth.register.terms') }}
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold fs-6 mb-4 shadow-sm"
+                        [disabled]="isLoading">
+                        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+                        {{ isLoading ? tr.t('auth.register.loading') : tr.t('auth.register.btn') }}
+                    </button>
+                </form>
+
+                <div class="text-center text-muted">
+                    {{ tr.t('auth.register.hasAccount') }} <a routerLink="/auth/login"
+                        class="text-primary text-decoration-none fw-bold">{{ tr.t('auth.register.login') }}</a>
+                </div>
+
+                <div class="text-center mt-4 d-none d-md-block">
+                    <a routerLink="/" class="text-muted text-decoration-none hover-primary small"><i class="bi"
+                            [ngClass]="(tr.lang$ | async) === 'ar' ? 'bi-arrow-right' : 'bi-arrow-left'"></i> {{
+                        tr.t('auth.back') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

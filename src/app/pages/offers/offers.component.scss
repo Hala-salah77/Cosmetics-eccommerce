@@ -1,0 +1,36 @@
+.tracking-wider {
+    letter-spacing: 0.1em;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.card-product {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.zoom-img {
+    transition: transform 0.5s ease;
+}
+
+.card-product:hover .zoom-img {
+    transform: scale(1.05);
+}
+
+.quick-add-overlay {
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+}
+
+.card-product:hover .quick-add-overlay {
+    opacity: 1;
+    transform: translateY(0);
+    padding-bottom: 1rem !important;
+}

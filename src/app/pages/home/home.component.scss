@@ -1,0 +1,226 @@
+.tracking-wider {
+    letter-spacing: 0.1em;
+}
+
+.fs-7 {
+    font-size: 0.85rem;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Base card styling */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+}
+
+/* Category Cards */
+.category-card {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Product Cards */
+.card-product {
+    transition: all 0.4s ease;
+    border-radius: 24px !important;
+    background: #ffffff;
+}
+
+.card-product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+}
+
+.product-img-wrapper {
+    transition: transform 0.5s ease;
+    transform-origin: center center;
+}
+
+.card-product:hover .product-img-wrapper img {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
+
+.image-switch-container {
+    .primary-img {
+        transition: opacity 0.4s ease, transform 0.5s ease;
+    }
+
+    .hover-img {
+        opacity: 0;
+        transition: opacity 0.4s ease, transform 0.5s ease;
+    }
+}
+
+.card-product:hover .image-switch-container {
+    .primary-img.has-hover {
+        opacity: 0;
+    }
+
+    .hover-img {
+        opacity: 1;
+    }
+}
+
+/* Product Card Minimalist Redesign */
+.card-product {
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.card-product:hover {
+    transform: translateY(-8px);
+}
+.card-product .product-img-wrapper {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: box-shadow 0.4s ease;
+}
+.card-product:hover .product-img-wrapper {
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.quick-add-btn {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease, color 0.2s ease;
+    color: var(--bs-dark);
+}
+.card-product:hover .quick-add-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+.quick-add-btn:hover {
+    background-color: var(--bs-primary) !important;
+    color: white !important;
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+    border-radius: 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fdfa 100%);
+    box-shadow: 0 10px 30px rgba(44, 94, 59, 0.03);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+}
+
+.quote-mark {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    font-size: 6rem;
+    color: rgba(44, 94, 59, 0.05);
+    font-family: serif;
+    line-height: 1;
+    z-index: 0;
+}
+
+/* Hero Section Slider Base */
+.hero-section {
+    min-height: 85vh;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.carousel-item {
+    transition: transform 1.5s ease-in-out, opacity 1.5s ease-out !important;
+}
+
+.hero-bg {
+    transition: transform 8s ease;
+    transform: scale(1);
+}
+
+.carousel-item.active .hero-bg {
+    transform: scale(1.05);
+    /* Slow zoom effect on active slide */
+}
+
+/* Carousel Indicators (Modern Dots) */
+.carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 6px;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.carousel-indicators .active {
+    width: 28px;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.skin-bg {
+    background-color: #e1f2e8 !important;
+}
+
+.hair-bg {
+    background-size: cover;
+    background-image: url(https://res.cloudinary.com/dkbjna5nf/image/upload/v1778820458/ChatGPT_Image_May_15_2026_07_47_00_AM_dldrjd.png);
+    background-position: center;
+}
+
+
+
+:host-context([dir="ltr"]) .hair-bg {
+    background-image: url('https://res.cloudinary.com/dkbjna5nf/image/upload/v1778821208/ChatGPT_Image_May_15_2026_07_59_43_AM_juquxu.png') !important;
+    background-position: center;
+}
+
+/* Consultation Section */
+.consultation-banner {
+    background-image: url('https://res.cloudinary.com/dkbjna5nf/image/upload/v1778826282/ChatGPT_Image_May_15_2026_09_23_43_AM_x0pajx.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 450px;
+    position: relative;
+    background-attachment: fixed;
+    /* Parallax effect */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.glass-card {
+    max-width: 700px;
+    backdrop-filter: blur(10px);
+    // -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-whatsapp-pulse {
+    animation: whatsappPulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+}
+
+@keyframes whatsappPulse {
+    to {
+        box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
+    }
+}

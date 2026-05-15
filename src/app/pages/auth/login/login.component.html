@@ -1,0 +1,81 @@
+<div class="container-fluid bg-light min-vh-100 d-flex align-items-center justify-content-center py-5"
+    [attr.dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+    <div class="card border-0 shadow-lg rounded-4 overflow-hidden" style="max-width: 900px; width: 100%;">
+        <div class="row g-0">
+            <!-- Image Section -->
+            <div class="col-md-6 d-none d-md-block bg-primary position-relative overflow-hidden">
+                <div class="position-absolute top-0 start-0 w-100 h-100 opacity-25">
+                    <div class="login-image d-flex justify-content-center align-items-center h-100 text-white">
+                    </div>
+                </div>
+                <div class="position-relative z-1 h-100 d-flex flex-column  p-5 text-white">
+                    <!-- <h2 class="display-5 fw-bold mb-4">{{ tr.t('auth.login.heroTitle') }}</h2> -->
+                    <!-- <p class="lead text-white fw-bold">{{ tr.t('auth.login.heroDesc') }}</p> -->
+                </div>
+            </div>
+            <!-- Form Section -->
+            <div class="col-md-6 p-4 p-sm-5 bg-white">
+                <div class="text-center mb-4">
+                    <a routerLink="/" class="text-decoration-none d-inline-block d-md-none mb-4">
+                        <img src="/logo.png" alt="Logo" height="40" class="me-1 mb-1">
+                        <span class="fw-bold text-secondary fs-3">GHAMBOLA</span>
+                    </a>
+                    <h3 class="fw-bold text-secondary">{{ tr.t('auth.login.title') }}</h3>
+                    <p class="text-muted">{{ tr.t('auth.login.heroDesc') }}</p>
+                </div>
+
+                <form (ngSubmit)="onSubmit()">
+                    <div *ngIf="errorMessage"
+                        class="alert alert-danger bg-danger bg-opacity-10 border-0 text-danger fw-medium py-2 rounded-3 small mb-4">
+                        {{errorMessage}}
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingEmail" placeholder="name&#64;example.com"
+                            [(ngModel)]="email" name="email" required
+                            [dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+                        <label for="floatingEmail" class="text-muted"
+                            [dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">{{ tr.t('auth.login.email') }}</label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                            [(ngModel)]="password" name="password" required
+                            [dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+                        <label for="floatingPassword" class="text-muted"
+                            [dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">{{ tr.t('auth.login.pass') }}</label>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="form-check d-flex align-items-center gap-2">
+                            <input class="form-check-input custom-checkbox cursor-pointer m-0" type="checkbox"
+                                id="rememberMe">
+                            <label class="form-check-label text-muted cursor-pointer mt-1" for="rememberMe">
+                                {{ tr.t('auth.login.remember') }}
+                            </label>
+                        </div>
+                        <a href="#" class="text-primary text-decoration-none small fw-medium">{{
+                            tr.t('auth.login.forgot') }}</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold fs-6 mb-4 shadow-sm"
+                        [disabled]="isLoading">
+                        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+                        {{ isLoading ? tr.t('auth.login.loading') : tr.t('auth.login.btn') }}
+                    </button>
+                </form>
+
+                <div class="text-center text-muted">
+                    {{ tr.t('auth.login.noAccount') }} <a routerLink="/auth/register"
+                        class="text-primary text-decoration-none fw-bold">{{ tr.t('auth.login.signup') }}</a>
+                </div>
+
+                <div class="text-center mt-5 d-none d-md-block">
+                    <a routerLink="/" class="text-muted text-decoration-none hover-primary small"><i class="bi"
+                            [ngClass]="(tr.lang$ | async) === 'ar' ? 'bi-arrow-right' : 'bi-arrow-left'"></i> {{
+                        tr.t('auth.back') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

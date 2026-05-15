@@ -1,0 +1,181 @@
+<!-- Breadcrumb Section -->
+<div class="bg-light py-4 border-bottom border-secondary border-opacity-10">
+  <div class="container" [attr.dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a routerLink="/" class="text-decoration-none text-muted hover-primary">{{ tr.t('nav.home') }}</a></li>
+        <li class="breadcrumb-item"><a routerLink="/products" class="text-decoration-none text-muted hover-primary">{{ tr.t('nav.shop') }}</a></li>
+        <li class="breadcrumb-item active fw-medium" aria-current="page">{{ product?.name }}</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container py-5 my-4" *ngIf="product" [attr.dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+  <div class="row g-5 align-items-start">
+    <!-- Product Images (Gallery) -->
+    <div class="col-lg-6">
+      <div class="position-sticky" style="top: 100px;">
+        <div class="position-relative bg-light rounded-5 overflow-hidden mb-4 shadow-sm border border-secondary border-opacity-10" style="aspect-ratio: 4/5;">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <img [src]="activeImage" [alt]="product.name" class="w-100 h-100 object-fit-cover transition-all">
+          </div>
+          <div class="position-absolute top-0 p-4" [ngClass]="(tr.lang$ | async) === 'ar' ? 'end-0' : 'start-0'" *ngIf="product.bestSeller">
+            <span class="badge bg-dark text-white px-3 py-2 shadow-sm" style="border-radius: 6px; letter-spacing: 1px; font-size: 0.75rem; text-transform: uppercase;">
+              Best Seller
+            </span>
+          </div>
+        </div>
+        
+        <!-- Thumbnails (If descImg exists, show it as second thumb) -->
+        <div class="row g-3">
+          <div class="col-3">
+            <div class="bg-light rounded-4 overflow-hidden cursor-pointer border border-2 transition-all" 
+                 [ngClass]="activeImage === product.image ? 'border-dark opacity-100' : 'border-transparent opacity-50 hover-opacity-100'"
+                 (click)="setActiveImage(product.image)"
+                 style="aspect-ratio: 1;">
+              <img [src]="product.image" alt="Thumbnail" class="w-100 h-100 object-fit-cover">
+            </div>
+          </div>
+          <div class="col-3" *ngIf="product.descImg">
+            <div class="bg-light rounded-4 overflow-hidden cursor-pointer border border-2 transition-all" 
+                 [ngClass]="activeImage === product.descImg ? 'border-dark opacity-100' : 'border-transparent opacity-50 hover-opacity-100'"
+                 (click)="setActiveImage(product.descImg)"
+                 style="aspect-ratio: 1;">
+              <img [src]="product.descImg" alt="Thumbnail 2" class="w-100 h-100 object-fit-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="col-lg-6">
+      <div [ngClass]="(tr.lang$ | async) === 'ar' ? 'pe-lg-4' : 'ps-lg-4'">
+        
+        <!-- Category & Rating -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted small text-uppercase tracking-wider fw-medium" style="letter-spacing: 1px;">
+            {{ product.category || 'Natural Care' }}
+          </span>
+          <div class="d-flex align-items-center gap-2">
+            <div class="text-warning fs-6 d-flex gap-1">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-half"></i>
+            </div>
+            <a href="#reviews" class="text-muted text-decoration-none small hover-primary">(24 {{ (tr.lang$ | async) === 'ar' ? 'تقييم' : 'Reviews' }})</a>
+          </div>
+        </div>
+
+        <h1 class="display-5 fw-bold text-dark mb-4" style="line-height: 1.2;">{{ product.name }}</h1>
+        
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <p class="fs-2 fw-bolder text-primary mb-0">${{ product.price.toFixed(2) }}</p>
+          <p *ngIf="product.oldPrice" class="fs-5 text-muted text-decoration-line-through mb-0">${{ product.oldPrice.toFixed(2) }}</p>
+        </div>
+        
+        <p class="fs-5 text-muted mb-5 lh-lg" style="font-weight: 300;">
+          {{ (tr.lang$ | async) === 'ar' ? 'تركيبة غنية ومغذية مصممة بعناية باستخدام مستخلصات طبيعية 100٪. يعمل هذا المنتج على ترطيب البشرة بعمق واستعادة نضارتها الطبيعية بدون أي مواد كيميائية ضارة، ليكون الإضافة المثالية لروتين العناية الخاص بك.' : 'A potent botanical formula designed to brighten, hydrate, and rejuvenate your natural beauty. Formulated with 100% natural cold-pressed oils and antioxidants to restore your natural glow without harsh chemicals.' }}
+        </p>
+
+        <!-- Quantity & Add to Cart -->
+        <div class="row g-3 align-items-center mb-5 pb-4 border-bottom border-secondary border-opacity-10">
+          <div class="col-auto">
+            <div class="quantity-selector d-flex align-items-center bg-light rounded-pill px-2" style="height: 56px; border: 1px solid rgba(0,0,0,0.08);">
+              <button class="btn btn-link text-dark text-decoration-none px-3 fs-5 shadow-none d-flex align-items-center justify-content-center" style="min-width: 40px;" type="button" (click)="decreaseQty()">-</button>
+              <input type="number" class="form-control text-center text-dark fw-bold bg-transparent border-0 shadow-none px-0 fs-5" style="width: 45px;" [value]="quantity" readonly>
+              <button class="btn btn-link text-dark text-decoration-none px-3 fs-5 shadow-none d-flex align-items-center justify-content-center" style="min-width: 40px;" type="button" (click)="increaseQty()">+</button>
+            </div>
+          </div>
+          <div class="col">
+            <button class="btn btn-dark w-100 rounded-pill fw-bold fs-5 d-flex justify-content-center align-items-center gap-3 btn-hover-lift" style="height: 56px;" (click)="addToCart()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+              </svg>
+              {{ tr.t('details.addToCart') }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Premium Features -->
+        <div class="d-flex flex-wrap gap-4 text-dark small fw-medium mb-5">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-truck fs-5 text-primary"></i>
+            {{ tr.t('details.shipping') }}
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-repeat fs-5 text-primary"></i>
+            {{ tr.t('details.returns') }}
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-patch-check fs-5 text-primary"></i>
+            {{ tr.t('details.organic') }}
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-shield-check fs-5 text-success"></i>
+            {{ (tr.lang$ | async) === 'ar' ? 'مصرح من وزارة الصحة' : 'Ministry of Health Approved' }}
+          </div>
+        </div>
+
+        <!-- Accordion Details (Premium Style) -->
+        <div class="accordion premium-accordion" id="productAccordion">
+          <!-- Description -->
+          <div class="accordion-item bg-transparent border-0 border-bottom border-secondary border-opacity-10 mb-2">
+            <h2 class="accordion-header">
+              <button class="accordion-button bg-transparent shadow-none px-0 fw-bold text-dark fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDesc" aria-expanded="true">
+                {{ tr.t('details.description') }}
+              </button>
+            </h2>
+            <div id="collapseDesc" class="accordion-collapse collapse show" data-bs-parent="#productAccordion">
+              <div class="accordion-body px-0 text-muted lh-lg pb-4">
+                {{ (tr.lang$ | async) === 'ar' ? 'هذا السيروم الخفيف سريع الامتصاص يتغلغل بعمق في البشرة ليقدم مضادات أكسدة قوية وأحماض دهنية أساسية. مثالي لجميع أنواع البشرة، بما في ذلك البشرة الحساسة. الاستخدام المنتظم يحسن مرونة البشرة، ويقلل الخطوط الدقيقة، ويترك بشرتك مشرقة.' : 'This lightweight, fast-absorbing serum penetrates deep into the skin delivering powerful antioxidants and essential fatty acids. Perfect for all skin types, including sensitive skin. Regular use improves skin elasticity, reduces fine lines, and leaves a radiant complexion.' }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Ingredients -->
+          <div class="accordion-item bg-transparent border-0 border-bottom border-secondary border-opacity-10 mb-2">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed bg-transparent shadow-none px-0 fw-bold text-dark fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIng">
+                {{ tr.t('details.ingredients') }}
+              </button>
+            </h2>
+            <div id="collapseIng" class="accordion-collapse collapse" data-bs-parent="#productAccordion">
+              <div class="accordion-body px-0 text-muted lh-lg pb-4">
+                <ul class="list-unstyled mb-0 custom-list">
+                  <li class="mb-2"><strong class="text-dark">Organic Rosehip Oil:</strong> Rich in Vitamin A to reduce hyperpigmentation.</li>
+                  <li class="mb-2"><strong class="text-dark">Jojoba Oil:</strong> Mimics natural sebum to balance oil production.</li>
+                  <li class="mb-2"><strong class="text-dark">Vitamin E:</strong> Powerful antioxidant protecting against free radicals.</li>
+                  <li><strong class="text-dark">Sea Buckthorn Extract:</strong> Promotes cell regeneration and healing.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- How to Use -->
+          <div class="accordion-item bg-transparent border-0 border-bottom border-secondary border-opacity-10 mb-2">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed bg-transparent shadow-none px-0 fw-bold text-dark fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHowTo">
+                {{ tr.t('details.howTo') }}
+              </button>
+            </h2>
+            <div id="collapseHowTo" class="accordion-collapse collapse" data-bs-parent="#productAccordion">
+              <div class="accordion-body px-0 text-muted lh-lg pb-4">
+                <ol class="ps-3 mb-0" [ngClass]="(tr.lang$ | async) === 'ar' ? 'pe-3 ps-0' : ''">
+                  <li class="mb-2">Cleanse your face thoroughly.</li>
+                  <li class="mb-2">Apply 3-4 drops of the serum onto your palms.</li>
+                  <li class="mb-2">Gently press and massage into face, neck, and décolletage.</li>
+                  <li class="mb-0">Use morning and night. Follow with moisturizer if needed.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

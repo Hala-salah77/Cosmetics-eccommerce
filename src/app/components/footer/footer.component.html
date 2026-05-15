@@ -1,0 +1,115 @@
+<footer class="premium-footer pt-5 pb-3 mt-auto text-start" [dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+
+    <!-- Optional: Subtle top border line with glow -->
+    <div class="footer-glow"></div>
+
+    <div class="container position-relative z-1">
+        <div class="row gy-5">
+            <!-- Brand & About -->
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-brand mb-4">
+                    <h4 class="mb-3 d-flex align-items-center text-primary" style="font-family: serif;">
+                        <img src="/logo.png" alt="GHAMBOLA Logo" height="35"
+                            [ngClass]="(tr.lang$ | async) === 'ar' ? 'ms-2' : 'me-2'">
+                        <span class="brand-text text-primary">GHAMBOLA</span>
+                    </h4>
+                    <p class="lh-lg mb-0">{{ tr.t('footer.desc') }}</p>
+                    <p class="lh-lg mb-0">{{ tr.t('footer.desc1') }}</p>
+                    <p class="lh-lg mb-0">{{ tr.t('footer.desc2') }}</p>
+                    <p class="lh-lg mb-4">{{ tr.t('footer.desc3') }}</p>
+
+                </div>
+
+                <h6 class="text-uppercase fs-7 fw-bold mb-3 letter-spacing-1 opacity-75">{{
+                    tr.t('footer.followUs') }}</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    <a target="_blank" href="https://www.facebook.com/Ghamboolastore/" class="social-icon si-facebook"
+                        [title]="tr.t('footer.facebook')">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <!-- <a target="_blank"
+                        href="https://www.instagram.com/shahynaturals?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                        class="social-icon si-instagram" [title]="tr.t('footer.instagram')">
+                        <i class="bi bi-instagram"></i>
+                    </a> -->
+                    <a target="_blank" href="https://wa.me/+201099019014" class="social-icon si-whatsapp"
+                        [title]="tr.t('footer.whatsapp')">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                    <a target="_blank" href="mailto:ghambola@info.com" class="social-icon si-gmail"
+                        [title]="tr.t('footer.gmail')">
+                        <i class="bi bi-envelope-fill"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Locations -->
+            <!-- <div class="col-lg-3 col-md-6">
+                <h5 class="footer-title mb-4">{{ tr.t('footer.locations') }}</h5>
+                <div class="location-list">
+                    <div class="location-item d-flex gap-3 mb-4">
+                        <div class="icon-box"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div class="details">
+                            <span class="text-white-50 small lh-base">{{ tr.t('footer.branch1') }}</span>
+                        </div>
+                    </div>
+                    <div class="location-item d-flex gap-3">
+                        <div class="icon-box"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div class="details">
+                            <span class="text-white-50 small lh-base">{{ tr.t('footer.branch2') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Shop / Quick Links -->
+            <div class="col-lg-2 col-md-6">
+                <h5 class="footer-title mb-4">{{ tr.t('footer.shop') }}</h5>
+                <ul class="list-unstyled footer-links d-flex flex-column gap-2">
+                    <!-- <li><a routerLink="/products" [queryParams]="{category: 'hair'}">{{ tr.t('footer.hairCare') }}</a> -->
+                    <!-- </li> -->
+                    <!-- <li><a routerLink="/products" [queryParams]="{category: 'skin'}">{{ tr.t('footer.skinCare') }}</a>
+                    </li> -->
+                    <li><a routerLink="/offers">{{ tr.t('footer.specialOffers') }}</a></li>
+                    <li><a routerLink="/certifications">{{ tr.t('cert.title') }}</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="col-lg-4 col-md-6">
+                <h5 class="footer-title mb-4">{{ tr.t('footer.newsletter') }}</h5>
+                <p class="small mb-4 opacity-75">{{ tr.t('footer.newsletterDesc') }}</p>
+                <div class="newsletter-form">
+                    <div class="input-glass-group d-flex">
+                        <input type="email" class="form-control" [placeholder]="tr.t('footer.enterEmail')"
+                            [attr.aria-label]="tr.t('footer.enterEmail')">
+                        <button class="btn btn-primary-gradient px-3" type="button">
+                            <i class="bi bi-send-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom mt-5">
+            <hr class="footer-hr mb-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small">
+                <div class="copyright mb-3 mb-md-0 d-flex align-items-center gap-1">
+                    <span>&copy; {{ currentYear }} </span>
+                    <span class="opacity-75">{{ tr.t('footer.rights') }}</span>
+                </div>
+                <div class="footer-legal d-flex gap-4">
+                    <a href="#" class="footer-legal-link">{{ tr.t('footer.privacy') }}</a>
+                    <a href="#" class="footer-legal-link">{{ tr.t('footer.terms') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button type="button" class="back-to-top" [class.visible]="(showScrollTop$ | async)" (click)="scrollToTop()"
+        aria-label="Back to Top">
+        <i class="bi bi-arrow-up-short"></i>
+    </button>
+</footer>

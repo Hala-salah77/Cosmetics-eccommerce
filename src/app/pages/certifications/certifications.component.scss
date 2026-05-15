@@ -1,0 +1,68 @@
+.cert-slide {
+  cursor: pointer;
+  
+  .hover-scale {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  &:hover {
+    .hover-scale {
+      transform: scale(1.05);
+    }
+    
+    .zoom-hint {
+      opacity: 1 !important;
+      transform: translate(-50%, -50%) scale(1.1) !important;
+    }
+  }
+}
+
+.carousel-indicators {
+  bottom: -40px;
+  
+  button {
+    background-color: var(--bs-primary) !important;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+    border: none !important;
+    
+    &.active {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 15%;
+  opacity: 0.8;
+  
+  .control-btn {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: var(--bs-primary) !important;
+      color: #fff !important;
+      transform: scale(1.1);
+    }
+  }
+  
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.lightbox {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 1060 !important;
+  
+  .max-vh-90 { max-height: 90vh; }
+  .max-vw-90 { max-width: 90vw; }
+  
+  img {
+    object-fit: contain;
+    cursor: default;
+  }
+}

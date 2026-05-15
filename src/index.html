@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>GHAMBOLA</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="logo.png">
+  
+  <!-- Basic SEO Meta Tags -->
+  <meta name="description" content="Premium, Natural, and Clean skin and hair care products made with organic ingredients to nourish your body.">
+  <meta name="keywords" content="organic skincare, natural hair care, ghambola, clean beauty">
+  <meta name="author" content="GHAMBOLA">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph Meta Tags for Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GHAMBOLA">
+  <meta property="og:description" content="Discover our premium collection of 100% natural, clean, and organic skin and hair care products designed to nourish your body and soul.">
+  <meta property="og:url" content="https://shahynaturals.com">
+  <meta property="og:site_name" content="GHAMBOLA">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GHAMBOLA">
+  <meta name="twitter:description" content="Discover our premium collection of 100% natural, clean, and organic skin and hair care products.">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <style>
+    .app-loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      z-index: 9999;
+      flex-direction: column;
+    }
+    .app-loading .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(88, 61, 42, 0.1);
+      border-top: 4px solid #583d2a;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    .app-loading .loading-text {
+      margin-top: 24px;
+      font-family: 'Inter', sans-serif;
+      color: #583d2a;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <app-root>
+    <div class="app-loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Ghambola</div>
+    </div>
+  </app-root>
+</body>
+</html>

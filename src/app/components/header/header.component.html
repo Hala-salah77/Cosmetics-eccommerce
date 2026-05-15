@@ -1,0 +1,170 @@
+<!-- Top Announcement Bar -->
+<div class="marquee-wrapper text-white py-2 overflow-hidden position-relative"
+    [attr.dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+    <div class="marquee-content d-flex align-items-center fw-medium tracking-wide">
+        <!-- Repeat content for seamless loop -->
+        <span>✨ خصم 20% على أول طلب باستخدام كود GHAMBOLA20 ✨</span>
+        <span class="mx-5">|</span>
+        <span>🚚 شحن مجاني للطلبات فوق 500 جنيه 🚚</span>
+        <span class="mx-5">|</span>
+        <span>🌿 منتجات طبيعية 100% لبشرتك وشعرك 🌿</span>
+        <span class="mx-5">|</span>
+        <span>✨ خصم 20% على أول طلب باستخدام كود GHAMBOLA20 ✨</span>
+        <span class="mx-5">|</span>
+        <span>🚚 شحن مجاني للطلبات فوق 500 جنيه 🚚</span>
+        <span class="mx-5">|</span>
+        <span>🌿 منتجات طبيعية 100% لبشرتك وشعرك 🌿</span>
+        <span class="mx-5">|</span>
+    </div>
+</div>
+
+<!-- Main Navigation -->
+<nav class="navbar navbar-expand-lg sticky-top shadow-sm modern-nav"
+    [attr.dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" routerLink="/">
+            <img src="/logo.png" alt="GHAMBOLA Logo" height="75" class="me-2" style="transform: scale(1.6);">
+            <!-- <span>
+                <span class="fw-bold text-secondary fs-4" style="letter-spacing: 0.5px;">GHAMBOLA</span><br>
+          <span class="fw-bold text-secondary fs-7" style="letter-spacing: 0.5px;">BEAUTY</span> 
+
+          </span>-->
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-medium">
+                <li class="nav-item">
+                    <a class="nav-link px-3" routerLink="/" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">{{ tr.t('nav.home') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" routerLink="/products" routerLinkActive="active"
+                        [queryParams]="{category: 'hair'}">{{ tr.t('footer.hairCare') }}</a>
+                </li>
+                <li class="nav-item position-relative mt-2 mt-lg-0">
+                    <span class="position-absolute start-50 translate-middle-x badge rounded-pill bg-warning text-dark shadow-sm" style="top: -5px; font-size: 0.65rem; z-index: 10;">
+                        {{ tr.t('shop.soon') }}
+                    </span>
+                    <a class="nav-link px-3 disabled text-muted opacity-75" style="cursor: not-allowed;">{{ tr.t('footer.skinCare') }}</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link px-3" routerLink="/offers" routerLinkActive="active">{{ tr.t('nav.offers') }}</a>
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0 ms-lg-4">
+                <!-- Search Icon Button -->
+                <button class="btn btn-link text-secondary shadow-none px-2 d-flex align-items-center hover-primary" (click)="toggleSearch()" aria-label="Search">
+                    <i class="bi bi-search fs-5"></i>
+                </button>
+
+                <!-- User Icon -->
+                <a routerLink="/auth/login" class="btn btn-link text-secondary shadow-none px-2 d-flex align-items-center hover-primary" aria-label="Login">
+                    <i class="bi bi-person fs-5"></i>
+                </a>
+                
+                <!-- Cart Icon -->
+                <button class="btn btn-link text-secondary shadow-none position-relative border-0 px-2 d-flex align-items-center hover-primary" aria-label="Cart"
+                    routerLink="/cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-cart3" viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                    </svg>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-1"
+                        *ngIf="(cartItemCount$ | async) as count">
+                        {{ count }}
+                        <span class="visually-hidden">items in cart</span>
+                    </span>
+                </button>
+
+                <div class="vr d-none d-lg-block mx-2 bg-secondary opacity-25"></div>
+
+                <!-- Language Toggle -->
+                <button
+                    class="btn btn-sm fw-bold rounded-pill px-3 py-1 border border-secondary border-opacity-25 text-secondary d-flex align-items-center gap-1"
+                    (click)="tr.toggle()" style="font-size: 0.8rem; min-width: 64px;">
+                    <span>{{ (tr.lang$ | async) === 'en' ? '🇸🇦 AR' : '🇬🇧 EN' }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Search Overlay Layer -->
+<div class="search-overlay bg-white shadow-lg d-flex flex-column" 
+     [class.open]="isSearchOpen" 
+     [attr.dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+    
+    <!-- Close Button & Header -->
+    <div class="p-4 d-flex justify-content-between align-items-center border-bottom border-secondary border-opacity-10">
+        <h5 class="mb-0 fw-bold text-secondary">{{ (tr.lang$ | async) === 'ar' ? 'البحث عن منتجات' : 'Search Products' }}</h5>
+        <button class="btn btn-close shadow-none" aria-label="Close" (click)="closeSearch()"></button>
+    </div>
+
+    <!-- Search Input -->
+    <div class="p-4 bg-light">
+        <div class="input-group input-group-lg shadow-sm">
+            <span class="input-group-text bg-white text-muted px-4"
+                  [ngClass]="(tr.lang$ | async) === 'ar' ? 'rounded-end-pill border-start-0' : 'rounded-start-pill border-end-0'">
+                <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control shadow-none fs-6" 
+                   [ngClass]="(tr.lang$ | async) === 'ar' ? 'rounded-start-pill border-end-0' : 'rounded-end-pill border-start-0'"
+                   [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" 
+                   [placeholder]="(tr.lang$ | async) === 'ar' ? 'اكتب اسم المنتج، القسم، الخ...' : 'Type product name, category...'" autofocus>
+        </div>
+    </div>
+
+    <!-- Search Results / Skeleton -->
+    <div class="flex-grow-1 overflow-auto p-4 custom-scrollbar">
+        <!-- Skeleton Loader -->
+        <div *ngIf="isSearching">
+            <div class="d-flex gap-3 mb-4 placeholder-glow" *ngFor="let i of [1,2,3,4,5]">
+                <div class="placeholder rounded-4" style="width: 70px; height: 70px;"></div>
+                <div class="d-flex flex-column justify-content-center flex-grow-1">
+                    <span class="placeholder col-8 mb-2 rounded bg-secondary opacity-25"></span>
+                    <span class="placeholder col-4 rounded bg-primary opacity-25"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Results -->
+        <div *ngIf="!isSearching && searchQuery && searchResults.length === 0" class="text-center text-muted py-5 mt-4">
+            <i class="bi bi-search fs-1 mb-3 d-block text-secondary opacity-25"></i>
+            <p class="mb-0 fw-medium">{{ (tr.lang$ | async) === 'ar' ? 'عفواً، لا توجد نتائج مطابقة لبحثك' : 'Sorry, no results found for your search' }}</p>
+        </div>
+
+        <!-- Results -->
+        <div *ngIf="!isSearching && searchResults.length > 0">
+            <h6 class="text-muted small fw-bold mb-4 tracking-wider text-uppercase">{{ searchResults.length }} {{ (tr.lang$ | async) === 'ar' ? 'نتيجة' : 'RESULTS' }}</h6>
+            <a *ngFor="let item of searchResults" [routerLink]="['/product', item.id]" (click)="closeSearch()"
+               class="text-decoration-none d-flex align-items-center gap-3 mb-3 p-2 rounded-4 hover-bg-light transition-all border border-transparent">
+                <div class="bg-light rounded-4 overflow-hidden" style="width: 70px; height: 70px;">
+                    <img [src]="item.image" class="w-100 h-100 object-fit-cover shadow-sm" alt="{{ item.name }}">
+                </div>
+                <div class="flex-grow-1">
+                    <h6 class="fw-bold text-dark mb-1 fs-6 lh-sm">{{ item.name }}</h6>
+                    <span class="text-primary fw-bolder">\${{ item.price | number:'1.2-2' }}</span>
+                </div>
+                <i class="bi text-muted px-2" [ngClass]="(tr.lang$ | async) === 'ar' ? 'bi-chevron-left' : 'bi-chevron-right'"></i>
+            </a>
+        </div>
+        
+        <!-- Empty State (No query) -->
+        <div *ngIf="!isSearching && !searchQuery" class="text-center text-muted py-5 mt-4">
+            <i class="bi bi-stars fs-1 mb-3 d-block text-primary opacity-50"></i>
+            <p class="mb-0 fw-medium">{{ (tr.lang$ | async) === 'ar' ? 'اكتشف أفضل منتجات العناية الطبيعية' : 'Discover the best natural care products' }}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Backdrop -->
+<div class="modal-backdrop fade show z-1050" *ngIf="isSearchOpen" (click)="closeSearch()"></div>

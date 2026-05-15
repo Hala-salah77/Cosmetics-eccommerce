@@ -1,0 +1,61 @@
+.hover-primary:hover {
+  color: var(--bs-primary) !important;
+}
+
+/* Premium Image Gallery */
+.transition-all {
+  transition: all 0.3s ease;
+}
+.hover-opacity-100:hover {
+  opacity: 1 !important;
+  border-color: var(--bs-dark) !important;
+}
+
+/* Quantity Input */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Add to Cart Button */
+.btn-hover-lift {
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.btn-hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+/* Premium Accordion */
+.premium-accordion .accordion-button::after {
+  background-size: 1rem;
+  transition: transform 0.3s ease;
+}
+.premium-accordion .accordion-button:not(.collapsed) {
+  color: var(--bs-primary) !important;
+  box-shadow: none;
+  background-color: transparent;
+}
+.premium-accordion .accordion-button:focus {
+  box-shadow: none;
+}
+
+/* Custom List Styles (Works for LTR and RTL) */
+.custom-list li {
+  position: relative;
+  padding-inline-start: 1.5rem;
+}
+.custom-list li::before {
+  content: "✦";
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--bs-primary);
+  font-size: 0.8rem;
+  top: 4px;
+}

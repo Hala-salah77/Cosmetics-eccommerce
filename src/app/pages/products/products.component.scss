@@ -1,0 +1,86 @@
+.tracking-wider {
+    letter-spacing: 0.1em;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Product Card Minimalist Redesign (Matches Home Page) */
+.card-product {
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.card-product:hover {
+    transform: translateY(-8px);
+}
+.card-product .product-img-wrapper {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: box-shadow 0.4s ease;
+}
+.card-product:hover .product-img-wrapper {
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.image-switch-container .hover-img {
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.5s ease;
+}
+.card-product:hover .image-switch-container .primary-img.has-hover {
+    opacity: 0;
+}
+.card-product:hover .image-switch-container .hover-img {
+    opacity: 1;
+}
+
+/* Quick Add Button */
+.quick-add-btn {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease, color 0.2s ease;
+    color: var(--bs-dark);
+}
+.card-product:hover .quick-add-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+.quick-add-btn:hover {
+    background-color: var(--bs-primary) !important;
+    color: white !important;
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Pagination & Utilities */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.hover-primary {
+    transition: all 0.2s ease;
+}
+
+.hover-primary:hover {
+    background-color: var(--bs-primary) !important;
+    color: white !important;
+}
+
+.btn-hover-lift {
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.btn-hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+/* Checkboxes */
+.custom-checkbox .form-check-input {
+    width: 1.25em;
+    height: 1.25em;
+    margin-top: 0.2em;
+}
+
+.custom-checkbox .form-check-input:checked {
+    background-color: var(--bs-dark);
+    border-color: var(--bs-dark);
+}

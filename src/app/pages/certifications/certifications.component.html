@@ -1,0 +1,63 @@
+<section class="py-5 my-4 min-vh-100" [dir]="(tr.lang$ | async) === 'ar' ? 'rtl' : 'ltr'">
+  <div class="container">
+    <!-- Header -->
+    <div class="text-center mb-5 pb-3">
+      <span class="badge bg-primary text-white mb-3 px-3 py-2 rounded-pill fs-6 shadow-sm">
+        <i class="bi bi-shield-check me-2"></i>{{ tr.t('cert.badge') }}
+      </span>
+      <h1 class="display-4 fw-bolder text-secondary mb-3">{{ tr.t('cert.title') }}</h1>
+      <p class="lead text-muted mx-auto" style="max-width: 700px;">{{ tr.t('cert.desc') }}</p>
+    </div>
+
+    <!-- Slider Container -->
+    <div class="mx-auto position-relative" style="max-width: 600px;">
+      
+      <div id="certCarousel" class="carousel slide shadow-lg rounded-5 overflow-hidden border border-secondary border-opacity-10 bg-white" data-bs-ride="carousel">
+        
+        <!-- Indicators -->
+        <div class="carousel-indicators mb-3">
+          <button type="button" data-bs-target="#certCarousel" *ngFor="let img of certImages; let i = index"
+                  [attr.data-bs-slide-to]="i" [class.active]="i === 0" aria-current="true"
+                  class="bg-primary rounded-circle" style="width: 10px; height: 10px;"></button>
+        </div>
+
+        <!-- Carousel Items -->
+        <div class="carousel-inner" style="height: 600px; background-color: #fcfbfa;">
+          <div class="carousel-item h-100" *ngFor="let img of certImages; let i = index" [class.active]="i === 0">
+            <div class="d-flex justify-content-center align-items-center h-100 p-5 cert-slide" (click)="openLightbox(img)">
+              <img [src]="img" class="img-fluid object-fit-contain w-100 h-100 shadow-sm rounded-3 cursor-zoom-in hover-scale" alt="Ministry of Health Certification">
+              
+              <!-- Zoom hint overlay -->
+              <div class="zoom-hint position-absolute top-50 start-50 translate-middle bg-white text-primary rounded-pill px-4 py-2 shadow-lg fw-bold d-flex align-items-center gap-2" style="opacity: 0; transition: 0.3s;">
+                <i class="bi bi-zoom-in fs-5"></i>
+                <span>انقر للتكبير</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#certCarousel" data-bs-slide="prev">
+          <div class="control-btn bg-white text-primary shadow rounded-circle d-flex justify-content-center align-items-center" style="width: 45px; height: 45px;">
+            <i class="bi bi-chevron-left fs-4 fw-bolder"></i>
+          </div>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#certCarousel" data-bs-slide="next">
+          <div class="control-btn bg-white text-primary shadow rounded-circle d-flex justify-content-center align-items-center" style="width: 45px; height: 45px;">
+            <i class="bi bi-chevron-right fs-4 fw-bolder"></i>
+          </div>
+          <span class="visually-hidden">Next</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox position-fixed top-0 start-0 w-100 h-100 z-3 d-flex justify-content-center align-items-center"
+       *ngIf="selectedImage" (click)="closeLightbox()">
+    <button class="btn btn-close btn-close-white position-absolute top-0 end-0 m-4 z-4" aria-label="Close" (click)="closeLightbox()"></button>
+    <img [src]="selectedImage" class="img-fluid rounded-3 shadow-lg max-vh-90 max-vw-90" (click)="$event.stopPropagation()" alt="Certification Preview">
+  </div>
+</section>
